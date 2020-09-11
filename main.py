@@ -15,13 +15,16 @@ def main():
     while run:
         clock.tick(FPS)
         
+        # The Event Loop
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 run = False
             if event.type == pygame.MOUSEBUTTONDOWN:
                 pass
-        board.draw_sqaures(WIN)
-        pygame.display.update() 
+        
+        # Draws all the sqaures and peices on board
+        board.draw(WIN) 
+        pygame.display.update() # For screen updation
 
     pygame.quit()                    
 

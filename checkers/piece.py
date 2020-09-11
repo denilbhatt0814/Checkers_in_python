@@ -3,8 +3,8 @@ import pygame
 
 class Piece:
 
-    PADDING = 10
-    OUTLINE = 2
+    PADDING = 15
+    OUTLINE = 3
 
     def __init__(self, row, col, color):
         self.row = row
@@ -28,6 +28,7 @@ class Piece:
             
     def make_king(self):
         self.king  = True
+        #TODO:ADD A CROWN TO KING PIECE
 
     def draw(self, win):
         radius = (SQUARE_SIZE//2) - self.PADDING # Calc. of radius of main circle
