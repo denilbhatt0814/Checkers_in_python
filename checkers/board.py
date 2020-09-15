@@ -17,6 +17,25 @@ class Board:
             for col in range(row%2, COLS, 2):
                 pygame.draw.rect(win,RED, (row * SQUARE_SIZE, col * SQUARE_SIZE, SQUARE_SIZE,SQUARE_SIZE))
 
+    def move(self,piece,row,col):
+        """THIS CHANGEES THE POSITION OF PIECE FROM BOARD LIST"""
+        self.board[piece.row][piece.col], self.board[row][col] = self.board[row][col], self.board[piece.row][piece.col]
+        
+        # Now we will actully move the piece
+        piece.move(row,col)
+
+        # Checks if a piece has become a king        
+        if row == ROWS or row == 0:
+            piece.make_king()
+            if piece.color == WHITE:
+                self.white_kings += 1
+            else:
+                self.red_kings += 1
+
+    def get_piece(self, row, col):
+        """HANDS OVER THE PIECE OBJECT"""
+        return self.board[row][col]
+
     def create_board(self):
         """CODE FOR ADDING PEICES ONTO THE BOARD LIST"""
         for row in range(ROWS):

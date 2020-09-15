@@ -1,4 +1,4 @@
-from .constants import RED, SQUARE_SIZE, GREY
+from .constants import RED, SQUARE_SIZE, GREY, CROWN
 import pygame
 
 class Piece:
@@ -28,7 +28,6 @@ class Piece:
             
     def make_king(self):
         self.king  = True
-        #TODO:ADD A CROWN TO KING PIECE
 
     def draw(self, win):
         radius = (SQUARE_SIZE//2) - self.PADDING # Calc. of radius of main circle
@@ -39,6 +38,16 @@ class Piece:
         # Finall creating the main circle peice over the outline circle
         pygame.draw.circle(win, self.color, (self.x, self.y),radius)
 
-        def __repr__(self):
-            return str(self.color)
+        # Draws crown on king piece
+        if self.king:
+            win.blit(CROWN, (self.x - CROWN.get_width()//2, self.y - CROWN.get_height()//2))
+
+    def move(self,row,col):
+        """THIS MOVES THE PIECE ON BOARD"""
+        self.row = row
+        self.col = col
+        self.calc_pos()
+
+    def __repr__(self):
+        return str(self.color)
             
