@@ -1,6 +1,6 @@
 import pygame
 from checkers.constants import WIDTH, HEIGHT, SQUARE_SIZE 
-from checkers.board import Board
+from checkers.game import Game
 
 FPS = 30
 WIN = pygame.display.set_mode((WIDTH,HEIGHT))
@@ -15,11 +15,11 @@ def get_row_col_from_mouse(pos):
 def main():
     run = True
     clock = pygame.time.Clock()
-    board = Board()
 
     while run:
         clock.tick(FPS)
-        
+        game = Game(WIN)
+
         # The Event Loop
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -27,13 +27,11 @@ def main():
             if event.type == pygame.MOUSEBUTTONDOWN:
                 pos = pygame.mouse.get_pos()
                 row, col = get_row_col_from_mouse(pos)
-                piece = board.get_piece(row,col)
-                board.move(piece, 4, 3)
+                
             
         
         # Draws all the sqaures and peices on board
-        board.draw(WIN) 
-        pygame.display.update() # For screen updation
+        game.update() # For screen updation
 
     pygame.quit()                    
 
